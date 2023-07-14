@@ -73,6 +73,7 @@ const deleteTareas = asyncHandler(async (req, res) => {
     } else {
         // Acá lo actulizo. Le pongo req.body para que actualice todo el contenido
         tarea.deleteOne()
+        res.status(200).json({id:req.params.id})
     }
 
 
