@@ -14,7 +14,7 @@ app.use(cors())
 
 // En estas lineas usamos express para ver los datos del body del metodo post
 app.use(express.json())
-// app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false }))
 
 app.use(errorHandler)
 

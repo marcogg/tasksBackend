@@ -12,13 +12,16 @@ const getTareas = asyncHandler( async (req, res) => {
     // const tareas = await Tarea.find({text:'pizza'})
     
     // Así me busca todas las tareas 
-    const tareas = await Tarea.find()
-    res.status(200).json({"message": "Get tareas"})
+    const tareas = await Tarea.find({ user: req.user.id })
+
+    res.status(200).json(tareas)
 })
+
+// CREATE TAREAS
 const createTareas = asyncHandler(async (req, res) => {
-    if (!req.body.descripcion) {
-        throw new Error("Por favor teclea una descipción")
-        // res.status(404).json({message: "Por favor teclea una descripcion"})
+    if (!req.body.texto) {
+        res.status(400)
+        throw new Error('Por favor teclea una descripcion a la tarea')
     }
 
     const tarea = await Tarea.create({
