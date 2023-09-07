@@ -52,6 +52,8 @@ const registerUser = asyncHandler(async (req, res) => {
 
 // LOGIN USER
 const loginUser = asyncHandler(async (req, res) => {
+
+    const { email, password } = req.body
     // Verify if user already exists
     const user = await User.findOne({email})
         // Compare is a Bcrypt dependency method, dee docs for more info
