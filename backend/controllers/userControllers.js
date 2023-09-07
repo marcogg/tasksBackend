@@ -87,8 +87,10 @@ const getUserData = asyncHandler(async (req, res) => {
 
 const generateToken = (id) => {
     // Here we save in the payload what we want to include in JWT, considering our secret element in .env file
-    return jwt.sign({id}, process.env.JWT_SECRET)
-    // Nex line expiration time of Token (30 days in this case)
-    expiresIn: '30d'
+    return jwt.sign({id}, process.env.JWT_SECRET, {
+        // Nex line expiration time of Token (30 days in this case)
+        expiresIn: '30d'
+    })
 }
+
 module.exports = {registerUser, loginUser, getUserData}
