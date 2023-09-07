@@ -59,10 +59,10 @@ const loginUser = asyncHandler(async (req, res) => {
         // Compare is a Bcrypt dependency method, dee docs for more info
         if (user && (await bcrypt.compare(password, user.password))) {
             res.status(200).json({
-                    _id: user.id,
-                    _name: user.name,
-                    _email: user.email,
-                    token: generateToken(user._id)
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                token: generateToken(user._id)
             })
         } else {
             res.status(400)
@@ -74,12 +74,14 @@ const loginUser = asyncHandler(async (req, res) => {
 })
 
 // GET USER
+
 const getUserData = asyncHandler(async (req, res) => {
-    
-    
-    
-    res.json({message: 'User Data:'})
+    res.json(req.user)
 })
+
+// const getUserData = asyncHandler(async (req, res) => {
+//     res.json({message: 'User Data:'})
+// })
 
 // GENERATE TOKEN
 
