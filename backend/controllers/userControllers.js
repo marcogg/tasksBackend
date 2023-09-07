@@ -30,7 +30,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         name,
         email,
-        password, hashedPassword
+        password: hashedPassword
     })
 
     if (user) {
@@ -41,10 +41,10 @@ const registerUser = asyncHandler(async (req, res) => {
         })
     } else {
         res.status(400)
-        throw new Error ('User couldnt be created')
+        throw new Error ('User could not be created')
     }
 
-    res.json({message: 'user create'})
+    // res.json({message: 'user create'})
 })
 
 
