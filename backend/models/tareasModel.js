@@ -2,17 +2,17 @@ const mongoose = require('mongoose')
 
 const tareaSchema = mongoose.Schema({
     // Here we assign the reference for the Suser Schema
-    user:{
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref:'User'
+        ref: 'User'
     },
     texto: {
         type: String,
-        required: [true, 'Teclea una descripción'],
+        required: [true, 'Por favor teclea una descripcón para la tarea'],
     }
-},{
-    timestamps: true,
+}, {
+    timestamps: true
 })
 // EN mi DB en mongo por defecto lo pone en minúscula y busca el plural de la palabra!! para añadir en esa collection
 module.exports = mongoose.model('Tarea', tareaSchema)
