@@ -1,20 +1,19 @@
-const jwt = require ('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
 const User = require('../models/usersModel')
 
-const protect = asyncHandler(async(req, res, next) => {
+const protect = asyncHandler(async (req, res, next) => {
     let token
 
-    // Evaluate if we have a 'bearer' type of token we want it 
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         try {
-            // Getting the token, splitting  the bearer and choosing the second group of spllitted array
+            //vamos a obtener el token del header de autorizacion
             token = req.headers.authorization.split(' ')[1]
 
-            // Verify token
+            //verificamos el token
             const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
-            // Getting data from the user located within the token
+            //obtengo los datos del usuario del token
             req.user = await User.findById(decoded.id).select('-password')
 
             next()
@@ -22,15 +21,15 @@ const protect = asyncHandler(async(req, res, next) => {
         } catch (error) {
             console.log(error)
             res.status(401)
-            throw new Error('Unauthorized access')
+            throw new Error('Acceso no autorizado')
         }
     }
 
-    if(!token){
+    if (!token) {
         res.status(401)
-            throw new Error('Token not found')
+        throw new Error('Acceso no autorizado, no fué proporcionado el token')
     }
 
 })
 
-module.exports = {protect}
+module.exports = { protect }
