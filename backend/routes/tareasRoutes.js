@@ -22,6 +22,6 @@ router.route('/').get(protect, getTareas).post(protect, createTareas)
 // router.delete('/:id', deleteTareas)
 
 // Protegemos la ruta con el protect del middleware
-router.route('/:id').delete(protect, deleteTareas).put(protect, deleteTareas)
+router.route('/:id').delete(protect, deleteTareas).put(protect, updateTareas)
 
 module.exports = router
