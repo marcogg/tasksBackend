@@ -30,6 +30,9 @@ const createTareas = asyncHandler(async (req, res) => {
     })
 res.status(201).json({"message": "Crear tareas"})
 
+// Former way to try post create
+// res.status(201).json({"message": "Crear tareas"})
+
 })
 
 
